@@ -1,4 +1,4 @@
-module github.com/onemorebsmith/kaspastratum/src/kaspastratum
+module github.com/nickygreen/test/src/kaspastratum
 
 go 1.18
 
