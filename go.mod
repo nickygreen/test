@@ -1,4 +1,3 @@
-module github.com/nickygreen/test
 module github.com/onemorebsmith/kaspastratum/src/kaspastratum
 
 go 1.18
