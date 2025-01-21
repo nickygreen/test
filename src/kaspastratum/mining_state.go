@@ -6,7 +6,9 @@ import (
 	"time"
 
 	"github.com/kaspanet/kaspad/app/appmessage"
-	"github.com/onemorebsmith/kaspastratum/src/gostratum"
+	"github.com/nickygreen/test/src/gostratum"
+	"github.com/spectre-project/spectre-stratum-bridge/src/gostratum"
+	"github.com/spectre-project/spectred/app/appmessage"
 )
 
 const maxjobs = 32

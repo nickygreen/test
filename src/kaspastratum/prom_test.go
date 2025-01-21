@@ -4,7 +4,10 @@ import (
 	"testing"
 
 	"github.com/kaspanet/kaspad/app/appmessage"
-	"github.com/onemorebsmith/kaspastratum/src/gostratum"
+	"github.com/nickygreen/test/src/kaspastratum"
+	"github.com/spectre-project/spectre-stratum-bridge/src/gostratum"
+	"github.com/spectre-project/spectred/app/appmessage"
+)
 )
 
 func TestPromValid(t *testing.T) {

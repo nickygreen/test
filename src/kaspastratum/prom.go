@@ -6,10 +6,11 @@ import (
 	"sync"
 
 	"github.com/kaspanet/kaspad/app/appmessage"
-	"github.com/onemorebsmith/kaspastratum/src/gostratum"
+	"github.com/nickygreen/test/src/gostratum"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/spectre-project/spectred/app/appmessage"
 	"go.uber.org/zap"
 )
 

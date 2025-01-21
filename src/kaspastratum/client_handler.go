@@ -9,7 +9,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/onemorebsmith/kaspastratum/src/gostratum"
+	"github.com/nickygreen/test/src/gostratum"
+	"github.com/spectre-project/spectre-stratum-bridge/src/gostratum"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )
@@ -83,7 +84,7 @@ func (c *clientListener) OnDisconnect(ctx *gostratum.StratumContext) {
 	RecordDisconnect(ctx)
 }
 
-func (c *clientListener) NewBlockAvailable(kapi *KaspaApi) {
+func (c *clientListener) NewBlockAvailable(sprApi *SpectreApi, soloMining bool) {
 	c.clientLock.Lock()
 	addresses := make([]string, 0, len(c.clients))
 	for _, cl := range c.clients {
@@ -105,11 +106,11 @@ func (c *clientListener) NewBlockAvailable(kapi *KaspaApi) {
 			if err != nil {
 				if strings.Contains(err.Error(), "Could not decode address") {
 					RecordWorkerError(client.WalletAddr, ErrInvalidAddressFmt)
-					client.Logger.Error(fmt.Sprintf("failed fetching new block template from kaspa, malformed address: %s", err))
+					client.Logger.Error(fmt.Sprintf("failed fetching new block template from spectre, malformed address: %s", err))
 					client.Disconnect() // unrecoverable
 				} else {
 					RecordWorkerError(client.WalletAddr, ErrFailedBlockFetch)
-					client.Logger.Error(fmt.Sprintf("failed fetching new block template from kaspa: %s", err))
+					client.Logger.Error(fmt.Sprintf("failed fetching new block template from spectre: %s", err))
 				}
 				return
 			}

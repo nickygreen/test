@@ -7,7 +7,10 @@ import (
 
 	"github.com/kaspanet/kaspad/app/appmessage"
 	"github.com/kaspanet/kaspad/infrastructure/network/rpcclient"
-	"github.com/onemorebsmith/kaspastratum/src/gostratum"
+	"github.com/nickygreen/test/src/gostratum"
+	"github.com/spectre-project/spectre-stratum-bridge/src/gostratum"
+	"github.com/spectre-project/spectred/app/appmessage"
+	"github.com/spectre-project/spectred/infrastructure/network/rpcclient"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )
@@ -132,7 +135,7 @@ func (s *KaspaApi) startBlockTemplateListener(ctx context.Context, blockReadyCb 
 func (ks *KaspaApi) GetBlockTemplate(
 	client *gostratum.StratumContext) (*appmessage.GetBlockTemplateResponseMessage, error) {
 	template, err := ks.kaspad.GetBlockTemplate(client.WalletAddr,
-		fmt.Sprintf(`'%s' via onemorebsmith/kaspa-stratum-bridge_%s`, client.RemoteApp, version))
+		fmt.Sprintf(`'%s' via spectre-project/spectre-stratum-bridge_%s`, client.RemoteApp, version))
 	if err != nil {
 		return nil, errors.Wrap(err, "failed fetching new block template from kaspa")
 	}

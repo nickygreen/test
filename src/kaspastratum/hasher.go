@@ -10,6 +10,7 @@ import (
 	"math/big"
 
 	"github.com/kaspanet/kaspad/app/appmessage"
+	"github.com/spectre-project/spectred/app/appmessage"
 	"golang.org/x/crypto/blake2b"
 )
 
