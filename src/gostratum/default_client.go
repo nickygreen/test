@@ -1,4 +1,4 @@
-trepackage gostratum
+package gostratum
 
 import (
 	"fmt"
