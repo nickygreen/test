@@ -99,8 +99,14 @@ func (s *KaspaApi) waitForSync(verbose bool) error {
 }
 
 func (s *KaspaApi) startBlockTemplateListener(ctx context.Context, blockReadyCb func()) {
-	var blockReadyChan chan bool
-	restartChannel := true
+	blockReadyChan := make(chan bool)
+	err := s.kaspad.RegisterForNewBlockTemplateNotifications(func(_ *appmessage.NewBlockTemplateNotificationMessage) {
+		blockReadyChan <- true
+	})
+	if err != nil {
+		s.logger.Error("fatal: failed to register for block notifications from kaspa")
+	}
+
 	ticker := time.NewTicker(s.blockWaitTime)
 	for {
 		if err := s.waitForSync(false); err != nil {
@@ -108,18 +114,6 @@ func (s *KaspaApi) startBlockTemplateListener(ctx context.Context, blockReadyCb 
 			if err := s.reconnect(); err != nil {
 				s.logger.Error("error reconnecting to kaspad, waiting before retry: ", err)
 				time.Sleep(5 * time.Second)
-			}
-			restartChannel = true
-		}
-		if restartChannel {
-			blockReadyChan = make(chan bool)
-			err := s.kaspad.RegisterForNewBlockTemplateNotifications(func(_ *appmessage.NewBlockTemplateNotificationMessage) {
-				blockReadyChan <- true
-			})
-			if err != nil {
-				s.logger.Error("fatal: failed to register for block notifications from kaspa")
-			} else {
-				restartChannel = false
 			}
 		}
 		select {

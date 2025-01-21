@@ -16,7 +16,6 @@ import (
 type StratumContext struct {
 	parentContext context.Context
 	RemoteAddr    string
-	RemotePort    int
 	WalletAddr    string
 	WorkerName    string
 	RemoteApp     string
@@ -32,7 +31,6 @@ type StratumContext struct {
 
 type ContextSummary struct {
 	RemoteAddr string
-	RemotePort int
 	WalletAddr string
 	WorkerName string
 	RemoteApp  string
@@ -47,7 +45,6 @@ func (sc *StratumContext) Connected() bool {
 func (sc *StratumContext) Summary() ContextSummary {
 	return ContextSummary{
 		RemoteAddr: sc.RemoteAddr,
-		RemotePort: sc.RemotePort,
 		WalletAddr: sc.WalletAddr,
 		WorkerName: sc.WorkerName,
 		RemoteApp:  sc.RemoteApp,
@@ -60,7 +57,6 @@ func NewMockContext(ctx context.Context, logger *zap.Logger, state any) (*Stratu
 		parentContext: ctx,
 		State:         state,
 		RemoteAddr:    "127.0.0.1",
-		RemotePort:    50001,
 		WalletAddr:    uuid.NewString(),
 		WorkerName:    uuid.NewString(),
 		RemoteApp:     "mock.context",
